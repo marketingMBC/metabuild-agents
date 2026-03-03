@@ -40,7 +40,7 @@ export default function Navbar() {
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center gap-4">
             <Link
-              href="/contact"
+              href="/dashboard"
               className="hidden sm:inline-block px-6 py-2 bg-cyan text-navy font-semibold rounded-lg hover:bg-cyan-light transition-all duration-200 glow-cyan-sm"
             >
               Comenzar Gratis
@@ -76,7 +76,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/dashboard"
                 className="mx-4 px-4 py-2 bg-cyan text-navy font-semibold rounded-lg hover:bg-cyan-light transition-all duration-200 text-center"
                 onClick={() => setIsOpen(false)}
               >

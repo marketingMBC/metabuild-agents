@@ -29,7 +29,7 @@ export default function CTA() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
             <Link
-              href="/contact"
+              href="/dashboard"
               className="px-10 py-4 bg-cyan-400 text-navy-900 font-bold text-lg rounded-lg hover:bg-cyan-300 transition-all duration-200 hover:shadow-lg shadow-lg shadow-cyan-500/40 hover:scale-105 whitespace-nowrap"
             >
               Comenzar Gratis

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 interface PricingPlan {
   id: string;
@@ -158,15 +159,16 @@ export default function Pricing() {
                 </div>
 
                 {/* CTA Button */}
-                <button
-                  className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 mb-8 ${
+                <Link
+                  href={plan.id === 'enterprise' ? '/contact' : '/dashboard'}
+                  className={`block w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 mb-8 text-center ${
                     plan.highlighted
                       ? 'bg-[#29F8D4] text-[#000031] hover:shadow-[0_0_20px_rgba(41,248,212,0.4)] hover:scale-105'
                       : 'border border-[#29F8D4] text-[#29F8D4] hover:bg-[#29F8D4]/10 hover:shadow-[0_0_20px_rgba(41,248,212,0.2)]'
                   }`}
                 >
                   {plan.ctaText}
-                </button>
+                </Link>
 
                 {/* Features List */}
                 <div className="space-y-4">

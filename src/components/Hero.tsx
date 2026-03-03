@@ -34,10 +34,10 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-slide-up delay-300">
               <Link
-                href="/contact"
+                href="/dashboard"
                 className="px-8 py-3 sm:px-10 sm:py-4 bg-cyan-400 text-navy-900 font-semibold rounded-lg hover:bg-cyan-300 transition-all duration-200 hover:shadow-lg shadow-lg shadow-cyan-500/30 text-center sm:text-left whitespace-nowrap"
               >
-                Probar la Plataforma
+                Comenzar Gratis
               </Link>
               <Link
                 href="/#demo"
