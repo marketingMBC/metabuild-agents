@@ -1,6 +1,5 @@
 // ============================================================
-// MBC Agent HQ — Data Fetching Hook (Fase 2)
-// Polls /api/hq/status and updates the store with real data
+// MBC Agent HQ — Data Fetching Hook (v2 — Real Notion data)
 // ============================================================
 
 'use client';
@@ -8,24 +7,7 @@
 import { useEffect, useRef } from 'react';
 import { useHQStore } from '@/stores/hq-store';
 
-const POLL_INTERVAL = 30_000; // 30 seconds
-
-interface HQStatusResponse {
-  agents: Record<string, {
-    tasksActive: number;
-    tasksCompleted: number;
-    currentTask: string | null;
-  }>;
-  kpis: {
-    totalTasks: number;
-    activeTasks: number;
-    pipelineValue: number;
-    pipelineDeals: number;
-    customersCount: number;
-    recentMeetings: number;
-  };
-  lastUpdated: string;
-}
+const POLL_INTERVAL = 20_000; // 20 seconds
 
 export function useHQData() {
   const updateFromAPI = useHQStore(s => s.updateFromAPI);
@@ -36,17 +18,14 @@ export function useHQData() {
       try {
         const res = await fetch('/api/hq/status');
         if (!res.ok) return;
-        const data: HQStatusResponse = await res.json();
+        const data = await res.json();
         updateFromAPI(data);
       } catch {
-        // Silently fail — mock data is fine
+        // Silently fail — mock/simulation data continues
       }
     }
 
-    // Initial fetch
     fetchStatus();
-
-    // Poll
     intervalRef.current = setInterval(fetchStatus, POLL_INTERVAL);
 
     return () => {

@@ -39,10 +39,8 @@ interface HQStoreState {
   tick: (dt: number) => void;
   addActivity: (agentId: string, action: string) => void;
   consumeSparkles: () => Array<{ x: number; y: number; color: string }>;
-  updateFromAPI: (data: {
-    agents: Record<string, { tasksActive: number; tasksCompleted: number; currentTask: string | null }>;
-    kpis: { totalTasks: number; activeTasks: number; pipelineValue: number; pipelineDeals: number; customersCount: number; recentMeetings: number };
-  }) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateFromAPI: (data: any) => void;
 }
 
 export const useHQStore = create<HQStoreState>()(
@@ -81,6 +79,7 @@ export const useHQStore = create<HQStoreState>()(
 
     updateFromAPI: (data) =>
       set((state) => {
+        if (!data?.agents) return;
         for (const agent of state.agents) {
           const apiAgent = data.agents[agent.id];
           if (apiAgent) {
@@ -89,8 +88,26 @@ export const useHQStore = create<HQStoreState>()(
             if (apiAgent.currentTask) agent.currentTask = apiAgent.currentTask;
           }
         }
-        state.kpis.tasksToday = data.kpis.totalTasks;
-        if (data.kpis.pipelineValue > 0) state.kpis.pipelineValue = formatCompact(data.kpis.pipelineValue);
+        if (data.kpis) {
+          state.kpis.tasksToday = data.kpis.totalTasks || state.kpis.tasksToday;
+          if (data.kpis.pipelineDeals) state.kpis.pipelineValue = `${data.kpis.pipelineDeals} deals`;
+          if (data.kpis.customersCount) state.kpis.mrr = `${data.kpis.customersCount} clientes`;
+        }
+        if (data.activities?.length > 0) {
+          for (const act of data.activities) {
+            const ag = state.agents.find(a => a.id === act.agent);
+            if (!ag) continue;
+            const exists = state.activities.some(a => a.action === act.action && a.agentId === act.agent);
+            if (!exists) {
+              state.activities.unshift({
+                id: `api-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`,
+                agentId: act.agent, agentName: ag.name, agentColor: ag.color,
+                action: act.action, timestamp: new Date(act.timestamp).getTime(),
+              });
+            }
+          }
+          if (state.activities.length > 60) state.activities = state.activities.slice(0, 60);
+        }
         state.lastAPIUpdate = Date.now();
       }),
 
