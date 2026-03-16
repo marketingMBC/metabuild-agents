@@ -23,11 +23,11 @@ export default function ActivityLog() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--theme-border)] shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08] shrink-0">
         <div className="flex items-center gap-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--theme-text-tertiary)]">Actividad</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40">Actividad</h3>
           {filter && (
-            <button onClick={() => setFilter(null)} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">
+            <button onClick={() => setFilter(null)} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/[0.08] text-white/50 hover:bg-white/[0.12]">
               x limpiar
             </button>
           )}
@@ -39,8 +39,9 @@ export default function ActivityLog() {
               onClick={() => setFilter(filter === a.id ? null : a.id)}
               className="w-5 h-5 rounded-md flex items-center justify-center text-[8px] font-bold transition-all hover:scale-125 shadow-sm"
               style={{
-                backgroundColor: filter === a.id ? a.color : `${a.color}15`,
+                backgroundColor: filter === a.id ? a.color : `${a.color}20`,
                 color: filter === a.id ? '#FFF' : a.color,
+                border: filter === a.id ? `1px solid ${a.color}` : '1px solid transparent',
               }}
               title={a.name}
             >
@@ -55,28 +56,28 @@ export default function ActivityLog() {
           <button
             key={activity.id}
             onClick={() => selectAgent(activity.agentId)}
-            className="flex items-center gap-2.5 w-full text-left py-2 px-2.5 rounded-lg hover:bg-[var(--theme-hover)] transition-colors group"
+            className="flex items-center gap-2.5 w-full text-left py-2 px-2.5 rounded-lg hover:bg-white/[0.06] transition-colors group"
           >
             <div className="flex flex-col items-center gap-0.5 shrink-0">
               <span className="w-2 h-2 rounded-full shadow-sm" style={{ backgroundColor: activity.agentColor }} />
-              {idx < filtered.length - 1 && <span className="w-px h-4 bg-[var(--theme-border)]" />}
+              {idx < filtered.length - 1 && <span className="w-px h-4 bg-white/[0.08]" />}
             </div>
             <span
               className="w-6 h-6 rounded-lg flex items-center justify-center text-[9px] font-bold shrink-0 transition-transform group-hover:scale-110 shadow-sm"
-              style={{ backgroundColor: `${activity.agentColor}15`, color: activity.agentColor }}
+              style={{ backgroundColor: `${activity.agentColor}20`, color: activity.agentColor }}
             >
               {activity.agentName[0]}
             </span>
             <div className="flex-1 min-w-0">
-              <span className="text-xs text-[var(--theme-text-secondary)] truncate block">
-                <span className="font-semibold text-[var(--theme-text)]">{activity.agentName}</span>
-                <span className="text-[var(--theme-text-tertiary)]"> · {activity.action}</span>
+              <span className="text-xs text-white/60 truncate block">
+                <span className="font-semibold text-white/90">{activity.agentName}</span>
+                <span className="text-white/55"> · {activity.action}</span>
               </span>
             </div>
-            <span className="text-[9px] text-[var(--theme-text-muted)] font-mono shrink-0">{timeAgo(activity.timestamp)}</span>
+            <span className="text-[9px] text-white/35 font-mono shrink-0">{timeAgo(activity.timestamp)}</span>
           </button>
         ))}
-        {filtered.length === 0 && <p className="text-xs text-[var(--theme-text-muted)] text-center py-6">Sin actividad</p>}
+        {filtered.length === 0 && <p className="text-xs text-white/30 text-center py-6">Sin actividad</p>}
       </div>
     </div>
   );

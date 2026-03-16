@@ -27,7 +27,7 @@ export default function OfficeCanvas() {
   };
 
   return (
-    <div ref={containerRef} className="relative w-full overflow-hidden rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface)] shadow-sm">
+    <div ref={containerRef} className="relative w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] shadow-sm">
       <canvas
         ref={canvasRef}
         onClick={handleClick}
@@ -39,16 +39,16 @@ export default function OfficeCanvas() {
       {/* Top-left controls */}
       <div className="absolute top-3 left-3 flex items-center gap-2">
         {/* Live badge */}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-black/5 shadow-sm">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 shadow-sm">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">Live</span>
+          <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider">Live</span>
         </div>
 
         {/* Speed */}
-        <div className="flex items-center gap-0.5 px-1.5 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-black/5 shadow-sm">
+        <div className="flex items-center gap-0.5 px-1.5 py-1 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 shadow-sm">
           {SPEEDS.map(s => (
             <button
               key={s.value}
@@ -56,7 +56,7 @@ export default function OfficeCanvas() {
               className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold transition-all"
               style={{
                 backgroundColor: speed === s.value ? '#29F8D4' : 'transparent',
-                color: speed === s.value ? '#065F46' : '#9CA3AF',
+                color: speed === s.value ? '#0F1117' : 'rgba(255,255,255,0.5)',
               }}
             >
               {s.label}
@@ -68,7 +68,7 @@ export default function OfficeCanvas() {
       {/* Fullscreen */}
       <button
         onClick={toggleFullscreen}
-        className="absolute top-3 right-3 p-2 rounded-xl bg-white/90 backdrop-blur-sm border border-black/5 shadow-sm text-gray-400 hover:text-gray-600 transition-colors"
+        className="absolute top-3 right-3 p-2 rounded-xl bg-black/70 backdrop-blur-sm border border-white/10 shadow-sm text-white/40 hover:text-white/80 transition-colors"
       >
         {isFullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
       </button>
