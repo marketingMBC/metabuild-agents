@@ -45,7 +45,7 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   immer((set) => ({
     // Theme
-    theme: 'dark',
+    theme: 'light',
     setTheme: (theme) => set((state) => { state.theme = theme; }),
     toggleTheme: () => set((state) => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; }),
 

@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, MessageSquare, Bot, Users, BarChart3, Zap, Settings,
-  BookOpen, UserCog,
+  BookOpen, UserCog, Building2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   LayoutDashboard, MessageSquare, Bot, Users, BarChart3, Zap, Settings,
-  BookOpen, UserCog,
+  BookOpen, UserCog, Building2,
 };
 
 interface SidebarItemProps {

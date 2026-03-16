@@ -45,6 +45,33 @@
   --theme-card: rgba(0, 0, 0, 0.02);
 }
 
+/* ── Score Page Theme (Light Pastel) ─────────────────────── */
+[data-theme='score'] {
+  --theme-bg: #fafbfe;
+  --theme-surface: #ffffff;
+  --theme-surface-light: #f4f5fa;
+  --theme-border: rgba(100, 116, 145, 0.10);
+  --theme-text: #1e2a3a;
+  --theme-text-secondary: #5a6b7f;
+  --theme-text-tertiary: #94a0b0;
+  --theme-text-muted: #b8c1cc;
+  --theme-overlay: rgba(30, 42, 58, 0.10);
+  --theme-hover: rgba(100, 116, 145, 0.04);
+  --theme-card: rgba(255, 255, 255, 0.9);
+  --color-navy: #fafbfe;
+  --color-navy-light: #f4f5fa;
+  --color-navy-lighter: #eceef5;
+  --color-surface: #ffffff;
+  --color-surface-light: #f0f1f8;
+  --color-background: #fafbfe;
+  --color-foreground: #1e2a3a;
+  --color-cyan: #0ea5a0;
+  --color-cyan-dark: #0d9490;
+  --color-cyan-light: #14b8b3;
+  --color-purple: #7c3aed;
+  --color-purple-light: #8b5cf6;
+}
+
 /* Base styles */
 body {
   background: var(--theme-bg);
@@ -91,6 +118,12 @@ body {
 .text-glow-cyan {
   text-shadow: 0 0 20px rgba(41, 248, 212, 0.5);
 }
+[data-theme='score'] .glow-cyan {
+  box-shadow: 0 4px 14px rgba(14, 165, 160, 0.25), 0 1px 3px rgba(14, 165, 160, 0.1);
+}
+[data-theme='score'] .glow-cyan-sm {
+  box-shadow: 0 2px 8px rgba(14, 165, 160, 0.15);
+}
 
 /* Gradient text */
 .gradient-text {
@@ -101,6 +134,12 @@ body {
 }
 .gradient-text-cyan {
   background: linear-gradient(135deg, #29F8D4, #00B3A0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-theme='score'] .gradient-text {
+  background: linear-gradient(135deg, #0ea5a0, #7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -116,6 +155,16 @@ body {
   background: rgba(13, 13, 61, 0.85);
   backdrop-filter: blur(30px);
   border: 1px solid rgba(41, 248, 212, 0.15);
+}
+[data-theme='score'] .glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(100, 116, 145, 0.1);
+}
+[data-theme='score'] .glass-strong {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(100, 116, 145, 0.1);
 }
 
 /* Animations */
@@ -179,6 +228,12 @@ body {
     linear-gradient(90deg, rgba(41, 248, 212, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
+[data-theme='score'] .bg-grid {
+  background-image:
+    linear-gradient(rgba(14, 165, 160, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 160, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
 
 /* Gradient backgrounds */
 .bg-gradient-radial {
@@ -186,6 +241,20 @@ body {
 }
 .bg-gradient-hero {
   background: linear-gradient(180deg, #000031 0%, #0a0a4a 50%, #000031 100%);
+}
+[data-theme='score'] .bg-gradient-radial {
+  background: radial-gradient(ellipse at center, rgba(14, 165, 160, 0.06) 0%, transparent 70%);
+}
+[data-theme='score'] .bg-gradient-hero {
+  background: linear-gradient(180deg, #fafbfe 0%, #f4f5fb 50%, #fafbfe 100%);
+}
+
+/* Score theme card shadows */
+[data-theme='score'] [class*="rounded-2xl"][class*="border"] {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+[data-theme='score'] [class*="rounded-2xl"][class*="border"]:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 /* ── Dashboard Styles ────────────────────────────────────── */

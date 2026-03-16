@@ -6,6 +6,7 @@ import type { NavItem, ChannelConfig, PlanInfo } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Inicio', href: '/dashboard', icon: 'LayoutDashboard' },
+  { label: 'HQ', href: '/dashboard/hq', icon: 'Building2' },
   { label: 'Conversaciones', href: '/dashboard/conversations', icon: 'MessageSquare', badge: 5 },
   { label: 'Agentes', href: '/dashboard/agents', icon: 'Bot' },
   { label: 'Leads', href: '/dashboard/leads', icon: 'Users' },
