@@ -107,8 +107,8 @@ export default function RadarChart({
         {showBenchmark && (
           <polygon
             points={getPolygonPoints(benchmarks)}
-            fill="rgba(124, 58, 237, 0.06)"
-            stroke="rgba(124, 58, 237, 0.25)"
+            fill="rgba(139, 92, 246, 0.05)"
+            stroke="rgba(139, 92, 246, 0.20)"
             strokeWidth="1.5"
             strokeDasharray="4 4"
           />
@@ -117,10 +117,10 @@ export default function RadarChart({
         {/* Score polygon */}
         <polygon
           points={getPolygonPoints(scores)}
-          fill="rgba(14, 165, 160, 0.1)"
-          stroke="#0ea5a0"
+          fill="rgba(26, 172, 158, 0.08)"
+          stroke="#1aac9e"
           strokeWidth="2"
-          style={{ filter: 'drop-shadow(0 0 4px rgba(14, 165, 160, 0.2))' }}
+          style={{ filter: 'drop-shadow(0 0 3px rgba(26, 172, 158, 0.15))' }}
         />
 
         {/* Score points */}

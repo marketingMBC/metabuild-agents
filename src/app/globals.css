@@ -45,31 +45,33 @@
   --theme-card: rgba(0, 0, 0, 0.02);
 }
 
-/* ── Score Page Theme (Light Pastel) ─────────────────────── */
+/* ── Score Page Theme (Light Pastel — MBC Brand) ─────────── */
+/* Colors derived from MBC brand: cyan #29F8D4 → pastel teal, purple #8B5CF6 → pastel violet */
 [data-theme='score'] {
-  --theme-bg: #fafbfe;
+  --theme-bg: #fbfcfe;
   --theme-surface: #ffffff;
-  --theme-surface-light: #f4f5fa;
-  --theme-border: rgba(100, 116, 145, 0.10);
-  --theme-text: #1e2a3a;
-  --theme-text-secondary: #5a6b7f;
-  --theme-text-tertiary: #94a0b0;
-  --theme-text-muted: #b8c1cc;
-  --theme-overlay: rgba(30, 42, 58, 0.10);
-  --theme-hover: rgba(100, 116, 145, 0.04);
-  --theme-card: rgba(255, 255, 255, 0.9);
-  --color-navy: #fafbfe;
-  --color-navy-light: #f4f5fa;
-  --color-navy-lighter: #eceef5;
+  --theme-surface-light: #f3f5fb;
+  --theme-border: rgba(120, 130, 160, 0.10);
+  --theme-text: #1a2333;
+  --theme-text-secondary: #546275;
+  --theme-text-tertiary: #8e9db0;
+  --theme-text-muted: #b5c0cc;
+  --theme-overlay: rgba(26, 35, 51, 0.08);
+  --theme-hover: rgba(120, 130, 160, 0.04);
+  --theme-card: rgba(255, 255, 255, 0.95);
+  --color-navy: #fbfcfe;
+  --color-navy-light: #f3f5fb;
+  --color-navy-lighter: #eaedF6;
   --color-surface: #ffffff;
-  --color-surface-light: #f0f1f8;
-  --color-background: #fafbfe;
-  --color-foreground: #1e2a3a;
-  --color-cyan: #0ea5a0;
-  --color-cyan-dark: #0d9490;
-  --color-cyan-light: #14b8b3;
-  --color-purple: #7c3aed;
-  --color-purple-light: #8b5cf6;
+  --color-surface-light: #eff1f9;
+  --color-background: #fbfcfe;
+  --color-foreground: #1a2333;
+  /* Pastel MBC brand colors — softer for light theme */
+  --color-cyan: #1aac9e;
+  --color-cyan-dark: #159c8f;
+  --color-cyan-light: #20bfb0;
+  --color-purple: #8b5cf6;
+  --color-purple-light: #a78bfa;
 }
 
 /* Base styles */
@@ -119,10 +121,10 @@ body {
   text-shadow: 0 0 20px rgba(41, 248, 212, 0.5);
 }
 [data-theme='score'] .glow-cyan {
-  box-shadow: 0 4px 14px rgba(14, 165, 160, 0.25), 0 1px 3px rgba(14, 165, 160, 0.1);
+  box-shadow: 0 4px 14px rgba(26, 172, 158, 0.20), 0 1px 3px rgba(26, 172, 158, 0.08);
 }
 [data-theme='score'] .glow-cyan-sm {
-  box-shadow: 0 2px 8px rgba(14, 165, 160, 0.15);
+  box-shadow: 0 2px 8px rgba(26, 172, 158, 0.12);
 }
 
 /* Gradient text */
@@ -139,7 +141,7 @@ body {
   background-clip: text;
 }
 [data-theme='score'] .gradient-text {
-  background: linear-gradient(135deg, #0ea5a0, #7c3aed);
+  background: linear-gradient(135deg, #1aac9e, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -243,10 +245,10 @@ body {
   background: linear-gradient(180deg, #000031 0%, #0a0a4a 50%, #000031 100%);
 }
 [data-theme='score'] .bg-gradient-radial {
-  background: radial-gradient(ellipse at center, rgba(14, 165, 160, 0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(26, 172, 158, 0.05) 0%, rgba(139, 92, 246, 0.02) 50%, transparent 70%);
 }
 [data-theme='score'] .bg-gradient-hero {
-  background: linear-gradient(180deg, #fafbfe 0%, #f4f5fb 50%, #fafbfe 100%);
+  background: linear-gradient(180deg, #fbfcfe 0%, #f2f4fb 40%, #f0f6f5 70%, #fbfcfe 100%);
 }
 
 /* Score theme card shadows */

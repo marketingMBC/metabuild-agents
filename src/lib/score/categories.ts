@@ -368,11 +368,11 @@ export function getGrade(score: number): Grade {
 
 export function getGradeColor(grade: Grade): string {
   switch (grade) {
-    case 'A+': return '#0ea5a0'; // teal
+    case 'A+': return '#1aac9e'; // pastel teal (MBC cyan)
     case 'A': return '#10b981';  // emerald
-    case 'B': return '#7c3aed';  // purple
-    case 'C': return '#d97706';  // amber
-    case 'D': return '#ea580c';  // orange
+    case 'B': return '#8b5cf6';  // pastel violet (MBC purple)
+    case 'C': return '#d97706';  // warm amber
+    case 'D': return '#ea580c';  // soft orange
     case 'F': return '#dc2626';  // red
   }
 }
@@ -395,7 +395,7 @@ export function getTierLabel(tier: BenchmarkTier): string {
 
 export function getTierColor(tier: BenchmarkTier): string {
   switch (tier) {
-    case 'elite': return '#0ea5a0';
+    case 'elite': return '#1aac9e';
     case 'good': return '#10b981';
     case 'acceptable': return '#d97706';
     case 'needs-work': return '#dc2626';

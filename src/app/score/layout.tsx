@@ -20,7 +20,7 @@ export default function ScoreLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div data-theme="score" style={{ background: '#fafbfe', minHeight: '100vh' }}>
+    <div data-theme="score" style={{ background: '#fbfcfe', minHeight: '100vh' }}>
       {children}
     </div>
   );
