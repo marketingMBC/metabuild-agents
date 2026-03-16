@@ -637,13 +637,13 @@ export const CHATBOT_SIGNATURES: {
   {
     name: 'Zendesk Chat',
     type: 'livechat',
-    patterns: ['zopim', 'zendesk', 'zdassets.com', 'web_widget', 'ze-snippet'],
+    patterns: ['zopim', 'static.zdassets.com', 'web_widget', 'ze-snippet', 'zendesk-chat'],
     description: 'Solucion de soporte y chat en vivo de Zendesk.',
   },
   {
     name: 'HubSpot Chat',
     type: 'chatbot',
-    patterns: ['hubspot.com', 'hs-chat', 'HubSpotConversations', 'js.hs-scripts.com'],
+    patterns: ['js.hs-scripts.com', 'hs-chat', 'HubSpotConversations', 'hubspot-messages-iframe'],
     description: 'Chat integrado en el CRM de HubSpot.',
   },
   {
@@ -655,7 +655,7 @@ export const CHATBOT_SIGNATURES: {
   {
     name: 'LiveChat',
     type: 'livechat',
-    patterns: ['livechatinc.com', 'livechat', 'cdn.livechatinc.com'],
+    patterns: ['livechatinc.com', 'cdn.livechatinc.com', 'LiveChatWidget', '__lc_inited'],
     description: 'Solucion de chat en vivo para atencion al cliente.',
   },
   {
@@ -715,25 +715,29 @@ export const CHATBOT_SIGNATURES: {
   {
     name: 'ChatGPT Widget',
     type: 'ai-agent',
-    patterns: ['openai.com', 'chatgpt', 'chat.openai'],
+    // Only match actual widget/SDK integrations, not text mentions
+    patterns: ['chat.openai.com/share', 'cdn.openai.com', 'chatgpt-widget', 'openai-widget'],
     description: 'Widget basado en ChatGPT de OpenAI.',
   },
   {
     name: 'Claude / Anthropic',
     type: 'ai-agent',
-    patterns: ['anthropic', 'claude'],
+    // Only match actual SDK/API integrations, not text mentions
+    patterns: ['api.anthropic.com', 'anthropic-widget', 'claude-widget', 'claude.ai/embed'],
     description: 'Agente basado en Claude de Anthropic.',
   },
   {
     name: 'WhatsApp Business',
     type: 'chatbot',
-    patterns: ['wa.me', 'api.whatsapp.com', 'whatsapp-widget', 'whatsapp'],
-    description: 'Integracion de WhatsApp Business para atencion al cliente.',
+    // Only match actual widget integrations, not simple wa.me links
+    patterns: ['api.whatsapp.com/send', 'whatsapp-widget', 'wa-widget', 'whatsapp-chat-widget'],
+    description: 'Widget de WhatsApp Business integrado en el sitio.',
   },
   {
     name: 'Facebook Messenger',
     type: 'chatbot',
-    patterns: ['m.me', 'facebook.com/plugins', 'fb-customerchat', 'messenger'],
+    // 'messenger' alone is too generic — require specific FB chat patterns
+    patterns: ['fb-customerchat', 'facebook.com/plugins/customerchat', 'connect.facebook.net/*/sdk/xfbml.customerchat', 'fb-messenger-widget'],
     description: 'Widget de Facebook Messenger integrado en el sitio.',
   },
   // ── New 2025-2026 signatures ──────────────────────────

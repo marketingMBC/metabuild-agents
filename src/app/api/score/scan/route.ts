@@ -2,6 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { CHATBOT_SIGNATURES } from '@/lib/score/categories';
 import type { ScanResult, DetectedTechnology, SiteMetadata } from '@/lib/score/types';
 
+// Minimum confidence to consider a technology as "detected" (not just mentioned)
+const MIN_CONFIDENCE_THRESHOLD = 50;
+
+// Patterns that indicate actual widget/SDK integration (not just a mention)
+const WIDGET_INDICATORS = [
+  // Script tags loading external chat SDKs
+  /<script[^>]*src=["'][^"']*(?:widget|chat|messenger|embed|sdk|snippet)[^"']*["']/i,
+  // Chat widget containers
+  /id=["'](?:chat-widget|chat-container|chatbot|livechat|intercom-container|drift-widget|hubspot-messages)/i,
+  // Widget initialization calls
+  /\.init\s*\(|\.boot\s*\(|\.load\s*\(|Intercom\s*\(|drift\.load|Tawk_API|zE\s*\(|LiveChatWidget/i,
+  // Chat iframe embeds
+  /<iframe[^>]*(?:chat|widget|messenger|support)[^>]*>/i,
+  // WhatsApp widget (not just a link)
+  /whatsapp-widget|wa-widget|whatsapp.*widget|widget.*whatsapp/i,
+];
+
 export async function POST(request: NextRequest) {
   try {
     const { url } = await request.json();
@@ -67,13 +84,13 @@ export async function POST(request: NextRequest) {
 
     // Detect chatbot technologies
     const htmlLower = html.toLowerCase();
-    const technologies: DetectedTechnology[] = [];
+    const allDetections: DetectedTechnology[] = [];
 
     for (const sig of CHATBOT_SIGNATURES) {
       const matchCount = sig.patterns.filter((p) => htmlLower.includes(p.toLowerCase())).length;
       if (matchCount > 0) {
         const confidence = Math.min(100, Math.round((matchCount / sig.patterns.length) * 100));
-        technologies.push({
+        allDetections.push({
           name: sig.name,
           confidence,
           type: sig.type,
@@ -82,18 +99,35 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Filter: only keep detections above confidence threshold
+    // A single generic pattern match (e.g., "whatsapp" appearing as a link) is NOT enough
+    const technologies = allDetections.filter((t) => t.confidence >= MIN_CONFIDENCE_THRESHOLD);
+
+    // Check for actual widget integration indicators in the HTML
+    const hasWidgetIntegration = WIDGET_INDICATORS.some((pattern) => pattern.test(html));
+
     // Sort by confidence
     technologies.sort((a, b) => b.confidence - a.confidence);
 
-    const chatbotDetected = technologies.length > 0;
-    const topTech = technologies[0] || null;
+    // A chatbot is only "detected" if we have high-confidence matches OR widget integration
+    const chatbotDetected = technologies.length > 0 || (allDetections.length > 0 && hasWidgetIntegration);
+
+    // If we have widget integration but only low-confidence tech matches, include them
+    const finalTechnologies = chatbotDetected && technologies.length === 0 && hasWidgetIntegration
+      ? allDetections.filter((t) => t.confidence >= 25) // lower threshold if widget HTML found
+      : technologies;
+
+    const topTech = finalTechnologies[0] || null;
+
+    // Widget is only "visible" if we found actual widget HTML patterns
+    const widgetVisible = hasWidgetIntegration;
 
     const result: ScanResult = {
       url: normalizedUrl,
-      chatbotDetected,
+      chatbotDetected: finalTechnologies.length > 0 && (topTech?.confidence ?? 0) >= MIN_CONFIDENCE_THRESHOLD || hasWidgetIntegration,
       technology: topTech?.name || null,
-      technologies,
-      widgetVisible: chatbotDetected,
+      technologies: finalTechnologies,
+      widgetVisible,
       https: parsedUrl.protocol === 'https:',
       loadTime,
       metadata,
